@@ -11,13 +11,17 @@ pipeline {
         sh 'git pull origin develop'
       }
     }
-    stage('Test'){
+    stage('npm install'){
       steps{
         retry(3){
-          sh ''' 
-            npm i
-            npm test
-          '''
+          sh 'npm i'
+        }
+      }
+    }
+    stage('test'){
+      steps{
+        retry(3){
+          sh 'npm test'
         }
       }
     }
